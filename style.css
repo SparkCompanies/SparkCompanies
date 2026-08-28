@@ -446,3 +446,10 @@ body.locked{overflow:hidden}
 .ctastrip .in{display:flex;align-items:center;justify-content:space-between;gap:36px;flex-wrap:wrap}
 .ctastrip h2{color:var(--ink);margin:0}
 .ctastrip .rt{display:flex;gap:13px;flex-wrap:wrap}
+
+/* ---------- job board band ---------- */
+.jobsband{background:var(--yellow);padding:56px 0}
+.jobsband .in{display:flex;align-items:center;justify-content:space-between;gap:38px;flex-wrap:wrap}
+.jobsband .k{font-family:var(--label);font-weight:800;font-size:12px;letter-spacing:2.4px;text-transform:uppercase;color:rgba(0,0,0,.62);margin-bottom:10px}
+.jobsband h2{color:var(--ink);margin:0 0 10px}
+.jobsband p{color:rgba(0,0,0,.72);margin:0;max-width:46ch}
