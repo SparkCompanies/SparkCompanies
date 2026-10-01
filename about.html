@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<a href="#main" class="skip" style="position:absolute;left:-9999px;top:0;background:#FFD513;color:#141518;padding:10px 16px;z-index:200;font-family:'Roboto Condensed',sans-serif;font-weight:800" onfocus="this.style.left='12px'" onblur="this.style.left='-9999px'">Skip to content</a>
+<a href="#main" class="skip" style="position:absolute;left:-9999px;top:0;background:#FFD513;color:#141518;padding:10px 16px;z-index:200;font-family:var(--label);font-weight:800" onfocus="this.style.left='12px'" onblur="this.style.left='-9999px'">Skip to content</a>
 <div id="progress"></div>
 <svg style="display:none">
 <symbol id="in" viewBox="0 0 24 24"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4.03 0 4.78 2.65 4.78 6.1V24h-4v-6.9c0-1.65-.03-3.77-2.3-3.77-2.3 0-2.65 1.8-2.65 3.65V24h-4V8z"/></symbol>
@@ -94,25 +94,45 @@
       </div>
     </div>
   </div>
-</section><section id="leadership">
+</section><section class="xlead grain" id="leadership">
   <div class="wrap">
     <div class="sec-head">
       <div class="eyebrow reveal">Leadership</div>
-      <h2 class="reveal d1">Meet Our Executives</h2>
-      <div class="rule reveal d1"></div>
-      <p class="reveal d1" style="margin-top:22px;max-width:56ch">The team setting the standard across all five firms.</p>
+      <h2 class="reveal d1">The People Who Answer<br>For All Five Firms.</h2>
+      <p class="reveal d2" style="margin-top:20px;max-width:56ch">One executive team across the group. The same people set the standard, carry the escalations, and sign off on the work.</p>
     </div>
-    <div class="execs">
-      <div class="exec reveal"><div class="ava">DV</div><div class="nm">Dave Veres</div><div class="tt ph" title="Placeholder — send me this executive's title">Executive Leadership</div></div>
-      <div class="exec reveal"><div class="ava">AG</div><div class="nm">Alexander Gorman</div><div class="tt ph" title="Placeholder — send me this executive's title">Executive Leadership</div></div>
-      <div class="exec reveal"><div class="ava">AO</div><div class="nm">Aaron Opalewski</div><div class="tt ph" title="Placeholder — send me this executive's title">Executive Leadership</div></div>
-      <div class="exec reveal"><div class="ava">FK</div><div class="nm">Fletcher Kundtz</div><div class="tt ph" title="Placeholder — send me this executive's title">Executive Leadership</div></div>
-      <div class="exec reveal"><div class="ava">AS</div><div class="nm">Alexandra Spegel</div><div class="tt">Vice President of Operations</div></div>
+    <div class="xgrid">
+      <div class="xcard reveal d1">
+        <div class="xmono" aria-hidden="true">AO</div>
+        <div class="xmeta"><div class="xname">Aaron Opalewski</div><div class="xtitle">Chief Executive Officer</div></div>
+      </div>
+      <div class="xcard reveal d2">
+        <div class="xmono" aria-hidden="true">DV</div>
+        <div class="xmeta"><div class="xname">Dave Veres</div><div class="xtitle ph" title="Title not confirmed — send me the right one">Executive Leadership</div></div>
+      </div>
+      <div class="xcard reveal d3">
+        <div class="xmono" aria-hidden="true">AG</div>
+        <div class="xmeta"><div class="xname">Alexander Gorman</div><div class="xtitle">Regional Vice President</div></div>
+      </div>
+      <div class="xcard reveal d4">
+        <div class="xmono" aria-hidden="true">FK</div>
+        <div class="xmeta"><div class="xname">Fletcher Kundtz</div><div class="xtitle ph" title="Title not confirmed — send me the right one">Executive Leadership</div></div>
+      </div>
+      <div class="xcard reveal d1">
+        <div class="xmono" aria-hidden="true">AS</div>
+        <div class="xmeta"><div class="xname">Alexandra Spegel</div><div class="xtitle">Vice President of Operations</div></div>
+      </div>
     </div>
-    <div class="dirlbl reveal">Directors</div>
-    <div class="dirs">
-      <div class="exec reveal"><div class="ava">JP</div><div class="nm">Jamie Platt</div><div class="tt">Director</div></div>
-      <div class="exec reveal"><div class="ava">MP</div><div class="nm">Mary Partrico</div><div class="tt">Director</div></div>
+    <div class="xtier reveal"><span>Directors</span></div>
+    <div class="xgrid dirs">
+      <div class="xcard dir reveal d1">
+        <div class="xmono" aria-hidden="true">JP</div>
+        <div class="xmeta"><div class="xname">Jamie Platt</div><div class="xtitle">Director</div></div>
+      </div>
+      <div class="xcard dir reveal d2">
+        <div class="xmono" aria-hidden="true">MP</div>
+        <div class="xmeta"><div class="xname">Mary Patrico</div><div class="xtitle">Director</div></div>
+      </div>
     </div>
   </div>
 </section><section class="values grain" id="values">
@@ -214,6 +234,10 @@
       <li><b style="color:#fff">Tennessee</b><br><a href="https://www.google.com/maps/search/?api=1&query=Spark+Companies+5000+Meridian+Blvd+Suite+130+Franklin+TN+37067" target="_blank" rel="noopener" title="Open in Google Maps">5000 Meridian Blvd, Suite 130<br>Franklin, TN 37067</a></li>
       <li><a href="tel:5869305000">P: 586.930.5000</a><br><a href="fax:+15869915786">F: 586.991.5786</a></li>
     </ul></div>
+  </div>
+  <div class="wrap verse">
+    <p>&ldquo;In the same way, let your light shine before others, that they may see your good deeds and glorify your Father in heaven.&rdquo;</p>
+    <span>Matthew 5:16</span>
   </div>
   <div class="wrap fbot"><div>&copy;<span id="yr">2026</span> Spark Companies&reg;. All Rights Reserved.</div><div>Privacy Policy · Terms</div></div>
 </footer>
