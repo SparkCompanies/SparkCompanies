@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Data Center Electrical Staffing — Journeyman Electricians | Spark Talent</title>
 <meta name="description" content="Spark Talent is hiring journeyman electricians for hyperscale data center and industrial projects nationwide. Pay starts at $55/hr. Contractors: request an electrical crew.">
+<!-- Google Consent Mode v2 — denied until the visitor opts in -->
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',
+  analytics_storage:'denied',functionality_storage:'granted',security_storage:'granted'});
+(function(){try{var c=localStorage.getItem('sparkConsent');
+  if(c==='all'){gtag('consent','update',{ad_storage:'granted',ad_user_data:'granted',
+    ad_personalization:'granted',analytics_storage:'granted'});}}catch(e){}})();
+</script>
+<!-- REPLACE G-XXXXXXXXXX with your GA4 Measurement ID, then this starts collecting -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>gtag('js',new Date());gtag('config','G-XXXXXXXXXX',{anonymize_ip:true});</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@400;700;900&family=Roboto+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
@@ -239,9 +251,40 @@
     <p>&ldquo;In the same way, let your light shine before others, that they may see your good deeds and glorify your Father in heaven.&rdquo;</p>
     <span>Matthew 5:16</span>
   </div>
-  <div class="wrap fbot"><div>&copy;<span id="yr">2026</span> Spark Companies&reg;. All Rights Reserved.</div><div>Privacy Policy · Terms</div></div>
+  <div class="wrap fbot"><div>&copy;<span id="yr">2026</span> Spark Companies&reg;. All Rights Reserved.</div><div class="flegal"><a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="cookies.html">Cookies</a> &middot; <a href="#" data-ck-reopen>Cookie Settings</a></div></div>
 </footer>
 <button id="totop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&uarr;</button>
 <script src="app.js"></script>
+<div class="ckbar" id="ckbar" role="dialog" aria-live="polite" aria-label="Cookie preferences" hidden>
+  <div class="ck-in">
+    <div class="ck-copy">
+      <b>We use cookies.</b>
+      <span>Some keep the site working. Others tell us which pages people actually read, so we can make them better.
+        You choose. See our <a href="privacy.html">Privacy Policy</a> and <a href="cookies.html">Cookie Policy</a>.</span>
+    </div>
+    <div class="ck-act">
+      <button class="btn btn-o btn-sm" id="ckno" type="button">Essential Only</button>
+      <button class="btn btn-y btn-sm" id="ckyes" type="button">Accept All</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var bar=document.getElementById('ckbar'); if(!bar) return;
+  function get(){try{return localStorage.getItem('sparkConsent');}catch(e){return null;}}
+  function set(v){try{localStorage.setItem('sparkConsent',v);}catch(e){}}
+  function grant(){ if(window.gtag) gtag('consent','update',{ad_storage:'granted',
+    ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'}); }
+  function hide(){ bar.classList.remove('on'); setTimeout(function(){bar.hidden=true;},300); }
+  if(!get()){ bar.hidden=false; requestAnimationFrame(function(){bar.classList.add('on');}); }
+  document.getElementById('ckyes').addEventListener('click',function(){ set('all'); grant(); hide(); });
+  document.getElementById('ckno').addEventListener('click',function(){ set('essential'); hide(); });
+  // footer link lets anyone change their mind later
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[data-ck-reopen]'); if(!t) return;
+    e.preventDefault(); bar.hidden=false; requestAnimationFrame(function(){bar.classList.add('on');});
+  });
+})();
+</script>
 </body>
 </html>
