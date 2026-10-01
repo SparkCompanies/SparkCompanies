@@ -117,7 +117,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.92);backdro
 .award small{display:block;font-family:var(--label);font-weight:700;font-size:12px;letter-spacing:1.8px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:8px}
 .award small .yy{color:var(--yellow)}
 
-.statstrip{background:var(--yellow)}
+.statstrip{background:var(--yellow);overflow:hidden}
 .statstrip .grid{display:grid;grid-template-columns:repeat(4,1fr)}
 .statstrip .cell{padding:30px 32px;border-left:1px solid rgba(0,0,0,.14)}
 .statstrip .cell:first-child{border-left:0}
@@ -545,29 +545,31 @@ body.locked{overflow:hidden}
 .valfoot a:hover{color:var(--yellow);border-color:var(--yellow)}
 @media (max-width:700px){.valfoot{font-size:12px;letter-spacing:1.2px;line-height:2.1}}
 
-/* ---------- hero Inc. 5000 lockup ---------- */
-.hero > .in{position:relative}
-.heroaward{position:absolute;right:0;bottom:18px;z-index:2;
-  display:flex;align-items:center;gap:20px;text-align:left}
-.heroaward img{width:132px;height:132px;flex:none;background:#fff;border-radius:50%;padding:6px;
-  box-shadow:0 0 0 3px rgba(255,213,19,.6),0 22px 52px -16px rgba(0,0,0,.9)}
+/* ---------- Inc. 5000 lockup: anchors the stat strip ---------- */
+.statstrip .grid.inc{grid-template-columns:1.52fr 1fr 1fr 1fr 1fr}
+.statstrip .incCell{display:flex;align-items:center;gap:18px;background:var(--ink);border-left:0;
+  padding:26px 30px;position:relative}
+.statstrip .incCell::after{content:'';position:absolute;right:0;top:0;bottom:0;width:4px;background:var(--yellow)}
+.statstrip .incCell::before{content:'';position:absolute;right:100%;top:0;bottom:0;width:60vw;background:var(--ink)}
+.heroaward{display:flex;align-items:center;gap:18px;text-align:left}
+.heroaward img{width:84px;height:84px;flex:none;background:#fff;border-radius:50%;padding:5px;
+  box-shadow:0 0 0 2px rgba(255,213,19,.6),0 14px 32px -12px rgba(0,0,0,.9)}
 .ha-t{display:flex;flex-direction:column;align-items:flex-start}
-.ha-y{font-family:var(--display);font-size:64px;line-height:.84;color:#fff;letter-spacing:1px}
-.ha-k{font-family:var(--label);font-weight:800;font-size:11.5px;letter-spacing:1.8px;text-transform:uppercase;
-  background:var(--yellow);color:var(--ink);padding:6px 11px;border-radius:2px;margin:11px 0 10px}
-.ha-s{font-family:var(--label);font-weight:700;font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;
-  color:rgba(255,255,255,.66);line-height:1.6}
-@media (max-width:1120px){
-  .heroaward{position:static;transform:none;order:5;margin:40px auto 0;justify-content:center;width:max-content}
-  .heroaward img{width:96px;height:96px}
-  .ha-y{font-size:48px}
+.ha-y{font-family:var(--display);font-size:54px;line-height:.86;color:#fff;letter-spacing:1px}
+.ha-k{font-family:var(--label);font-weight:800;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+  background:var(--yellow);color:var(--ink);padding:5px 9px;border-radius:2px;margin:8px 0 7px}
+.ha-s{font-family:var(--label);font-weight:700;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;
+  color:rgba(255,255,255,.6);line-height:1.52}
+@media (max-width:1100px){
+  .statstrip .grid.inc{grid-template-columns:1fr 1fr}
+  .statstrip .incCell{grid-column:1 / -1;justify-content:center;padding:24px 20px}
+  .statstrip .incCell::before{display:none}
+  .statstrip .incCell::after{left:0;right:0;top:auto;bottom:0;width:100%;height:4px}
 }
 @media (max-width:520px){
-  .hero .lede{font-size:17.5px;line-height:1.58}
-  .heroaward{gap:14px}
   .heroaward img{width:68px;height:68px}
-  .ha-y{font-size:32px}
-  .ha-s{font-size:10px;letter-spacing:1.1px}
+  .ha-y{font-size:44px}
+  .ha-s{font-size:9.5px}
 }
 
 /* ---------- data center electrical page ---------- */
