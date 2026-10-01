@@ -43,15 +43,20 @@
 .pfcta p{font-size:15.5px;line-height:1.62;color:#B9B8B2;margin:0;max-width:52ch}
 .pfcta-act{display:flex;gap:12px;flex-wrap:wrap}
 
-.capband{background:var(--yellow);color:var(--ink);padding:96px 0}
-.capband > .in{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.capband{background:var(--paper2);border-top:1px solid var(--line);padding:104px 0 108px;position:relative;overflow:hidden}
+.capband::after{content:'';position:absolute;right:-6%;top:-34%;width:46vw;height:46vw;max-width:620px;max-height:620px;
+  background:radial-gradient(circle,rgba(255,213,19,.55),transparent 62%);pointer-events:none}
+.capband > .in{position:relative;display:grid;grid-template-columns:.92fr 1.08fr;gap:66px;align-items:center}
 .capband h2{color:var(--ink);margin:0}
-.capband .lead{font-size:19px;line-height:1.6;color:rgba(0,0,0,.72);margin:18px 0 0;max-width:40ch}
-.caplist{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.caplist div{display:flex;align-items:center;gap:12px;font-family:var(--label);font-weight:700;
-  font-size:16px;letter-spacing:.4px;color:var(--ink);background:rgba(0,0,0,.07);
-  border:1px solid rgba(0,0,0,.14);border-radius:6px;padding:16px 18px}
-.caplist div::before{content:'';width:10px;height:10px;flex:none;background:var(--ink);border-radius:2px;transform:rotate(45deg)}
+.capband .lead{font-size:18.5px;line-height:1.62;color:var(--muted);margin:20px 0 0;max-width:38ch}
+.capband .krule{width:72px;height:5px;background:var(--yellow);border-radius:2px;margin:26px 0 0}
+.caplist{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.caplist div{position:relative;display:flex;flex-direction:column;gap:5px;background:#fff;
+  border:1px solid var(--line);border-left:4px solid var(--yellow);border-radius:8px;padding:20px 20px 19px;
+  box-shadow:0 14px 30px -24px rgba(0,0,0,.5);transition:transform .22s,box-shadow .22s,border-color .22s}
+.caplist div:hover{transform:translateY(-4px);box-shadow:0 26px 48px -26px rgba(0,0,0,.42);border-color:var(--line2);border-left-color:var(--yellow)}
+.caplist .ct{font-family:var(--label);font-weight:800;font-size:15px;letter-spacing:.4px;color:var(--ink)}
+.caplist .cs{font-size:13.5px;line-height:1.5;color:var(--muted2)}
 
 @media (max-width:1040px){
   .pfgrid{grid-template-columns:repeat(2,1fr)}
@@ -94,7 +99,7 @@
 
 <header><nav class="wrap nav">
   <a href="index.html" class="brand"><img src="https://www.sparkcompanies.com/wp-content/uploads/2023/09/spark_companies.webp" alt="Spark Companies®"><span class="reg">®</span></a>
-  <ul><li><a class="lnk" href="services.html">Services &amp; Pricing</a></li><li><a class="lnk active" href="technology.html">Technology</a></li><li><a class="lnk" href="companies.html">Our Companies</a></li><li><a class="lnk" href="about.html">About</a></li><li><a class="lnk" href="contact.html">Contact</a></li></ul>
+  <ul><li><a class="lnk" href="services.html">Services</a></li><li><a class="lnk active" href="technology.html">Technology</a></li><li><a class="lnk hot" href="datacenter.html">Electricians</a></li><li><a class="lnk" href="companies.html">Companies</a></li><li><a class="lnk" href="about.html">About</a></li><li><a class="lnk" href="contact.html">Contact</a></li></ul>
   <div class="hcta">
     <a class="btn btn-y btn-sm" href="contact.html">Find Talent</a>
   </div>
@@ -172,20 +177,21 @@
   </div>
 </section>
 
-<section class="capband">
+<section class="capband grain">
   <div class="wrap in">
     <div>
       <h2>One Partner.<br>The Whole Workforce.</h2>
       <p class="lead">Services and software from the same team — so hiring, payroll, training and compliance
         finally speak to each other.</p>
+      <div class="krule"></div>
     </div>
     <div class="caplist">
-      <div>Staffing &amp; Recruiting</div>
-      <div>HR &amp; Compliance</div>
-      <div>Multi-state Payroll</div>
-      <div>Training &amp; Onboarding</div>
-      <div>Market Wage Data</div>
-      <div>Custom-built Platforms</div>
+      <div><span class="ct">Staffing &amp; Recruiting</span><span class="cs">Five specialist firms, one intake</span></div>
+      <div><span class="ct">HR &amp; Compliance</span><span class="cs">All 50 states, your branding</span></div>
+      <div><span class="ct">Multi-state Payroll</span><span class="cs">Filed, funded and reconciled</span></div>
+      <div><span class="ct">Training &amp; Onboarding</span><span class="cs">Any language, documents auto-filed</span></div>
+      <div><span class="ct">Market Wage Data</span><span class="cs">Score the rate before you offer it</span></div>
+      <div><span class="ct">Custom-built Platforms</span><span class="cs">Built in-house, not resold</span></div>
     </div>
   </div>
 </section>
