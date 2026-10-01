@@ -70,7 +70,7 @@ p{font-size:17.5px;line-height:1.74;color:var(--muted);margin:0 0 18px}
 .soc.on-dark a:hover{background:var(--yellow);border-color:var(--yellow);color:var(--ink)}
 
 .util{background:var(--ink);color:#CFCFC9}
-.util .in{display:flex;align-items:center;justify-content:space-between;gap:18px;height:44px;font-family:var(--label);font-weight:600;font-size:13px;letter-spacing:.6px}
+.util > .in{display:flex;align-items:center;justify-content:space-between;gap:18px;height:44px;font-family:var(--label);font-weight:600;font-size:13px;letter-spacing:.6px}
 .util a{text-decoration:none;color:#CFCFC9;transition:color .2s}
 .util a:hover{color:#fff}
 .util .r{display:flex;align-items:center;gap:22px}
@@ -91,7 +91,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.92);backdro
 .hero{position:relative;background:var(--ink);color:#fff;overflow:hidden}
 .hero .wm{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);font-family:var(--display);font-size:clamp(220px,34vw,560px);line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.07);user-select:none;pointer-events:none;white-space:nowrap;will-change:transform}
 .hero .glow{position:absolute;top:-30%;right:-10%;width:70vw;height:70vw;max-width:1000px;max-height:1000px;background:radial-gradient(circle,rgba(255,213,19,.13) 0%,rgba(255,213,19,0) 60%);pointer-events:none}
-.hero .in{position:relative;padding:72px 0 70px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.hero > .in{position:relative;padding:72px 0 70px;text-align:center;display:flex;flex-direction:column;align-items:center}
 .hero .kick{font-family:var(--label);font-weight:800;font-size:13.5px;letter-spacing:4px;text-transform:uppercase;color:var(--yellow);margin-bottom:22px;display:inline-flex;align-items:center;gap:16px}
 .hero .kick::before,.hero .kick::after{content:'';width:44px;height:2px;background:rgba(255,213,19,.55)}
 .hero h1{font-size:clamp(58px,8.6vw,132px);line-height:.88;letter-spacing:1px}
@@ -393,7 +393,7 @@ footer a{text-decoration:none;transition:color .18s}footer a:hover{color:var(--y
 @media (max-width:600px){
   .cards,.indgrid,form,.fgrid,.why .stats,.trust .cells,.statstrip .grid,.proc{grid-template-columns:1fr}
   .wrap{padding:0 20px}
-  .util .in .l{display:none}
+  .util > .in .l{display:none}
 }
 
 /* ---------- menu drawer ---------- */
@@ -433,7 +433,7 @@ body.locked{overflow:hidden}
 .phero{background:var(--ink);color:#fff;padding:74px 0 66px;position:relative;overflow:hidden}
 .phero .glow{position:absolute;top:-40%;right:-8%;width:60vw;height:60vw;max-width:820px;max-height:820px;
   background:radial-gradient(circle,rgba(255,213,19,.12) 0%,rgba(255,213,19,0) 62%);pointer-events:none}
-.phero .in{position:relative}
+.phero > .in{position:relative}
 .phero h1{font-family:var(--display);font-weight:400;font-size:clamp(52px,7vw,104px);line-height:.9;letter-spacing:.8px;margin:0}
 .phero .eyebrow{color:var(--yellow)}
 .phero .eyebrow::after{background:rgba(255,213,19,.55)}
@@ -443,13 +443,13 @@ body.locked{overflow:hidden}
 
 /* ---------- cta strip ---------- */
 .ctastrip{background:var(--yellow);padding:66px 0}
-.ctastrip .in{display:flex;align-items:center;justify-content:space-between;gap:36px;flex-wrap:wrap}
+.ctastrip > .in{display:flex;align-items:center;justify-content:space-between;gap:36px;flex-wrap:wrap}
 .ctastrip h2{color:var(--ink);margin:0}
 .ctastrip .rt{display:flex;gap:13px;flex-wrap:wrap}
 
 /* ---------- job board band ---------- */
 .jobsband{background:var(--yellow);padding:56px 0}
-.jobsband .in{display:flex;align-items:center;justify-content:space-between;gap:38px;flex-wrap:wrap}
+.jobsband > .in{display:flex;align-items:center;justify-content:space-between;gap:38px;flex-wrap:wrap}
 .jobsband .k{font-family:var(--label);font-weight:800;font-size:12px;letter-spacing:2.4px;text-transform:uppercase;color:rgba(0,0,0,.62);margin-bottom:10px}
 .jobsband h2{color:var(--ink);margin:0 0 10px}
 .jobsband p{color:rgba(0,0,0,.72);margin:0;max-width:46ch}
