@@ -476,6 +476,8 @@ body.locked{overflow:hidden}
 .ctastrip > .in{display:flex;align-items:center;justify-content:space-between;gap:36px;flex-wrap:wrap}
 .ctastrip h2{color:var(--ink);margin:0}
 .ctastrip .rt{display:flex;gap:13px;flex-wrap:wrap}
+.ctastrip .btn-o{border-color:rgba(20,21,24,.4);color:var(--ink)}
+.ctastrip .btn-o:hover{border-color:var(--ink);background:rgba(20,21,24,.07)}
 
 /* ---------- job board band ---------- */
 .jobsband{background:var(--yellow);padding:56px 0}
@@ -668,6 +670,21 @@ body.locked{overflow:hidden}
 .nav .lnk.hot::after{content:'';position:absolute;right:0;top:2px;width:7px;height:7px;border-radius:50%;
   background:var(--yellow);box-shadow:0 0 0 3px rgba(255,213,19,.25)}
 
+/* ---------- mission band: the team photo, full bleed ---------- */
+.quote.teamband{position:relative;background:#101114;overflow:hidden;padding:124px 0}
+.quote.teamband .tb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:center 46%;filter:grayscale(.3) contrast(1.04) brightness(1.02)}
+.quote.teamband::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(16,17,20,.74) 0%,rgba(16,17,20,.42) 46%,rgba(16,17,20,.82) 100%)}
+.quote.teamband > .wrap{position:relative;z-index:1;text-align:center}
+.quote.teamband .eyebrow{color:var(--yellow);justify-content:center;display:inline-flex}
+.quote.teamband .q{color:#fff;max-width:24ch;margin:18px auto 22px;
+  text-shadow:0 3px 34px rgba(0,0,0,.8),0 1px 3px rgba(0,0,0,.6)}
+.quote.teamband .by{color:rgba(255,255,255,.84);text-shadow:0 1px 14px rgba(0,0,0,.75)}
+.quote.teamband::before{content:'';position:absolute;left:0;bottom:0;width:100%;height:5px;
+  background:var(--yellow);z-index:2}
+@media (max-width:760px){.quote.teamband{padding:86px 0}}
+
 /* ---------- industrial treatment: data center page ---------- */
 .phero.blueprint::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
   background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
@@ -689,6 +706,33 @@ body.locked{overflow:hidden}
   .specrow{gap:2px}
   .hazard{height:9px}
 }
+
+/* ---------- hero electrical field (datacenter) ---------- */
+.arcfield{position:absolute;top:0;right:0;width:52%;height:100%;pointer-events:none;z-index:0;overflow:hidden;
+  -webkit-mask-image:linear-gradient(to left,#000 0,#000 60%,transparent 100%);
+  mask-image:linear-gradient(to left,#000 0,#000 60%,transparent 100%)}
+.arcfield svg{position:absolute;right:0;top:50%;transform:translateY(-50%);width:100%;height:auto;max-height:122%}
+.af-line{fill:none;stroke:rgba(255,255,255,.14);stroke-width:1.25}
+.af-node{fill:none;stroke:rgba(255,255,255,.26);stroke-width:1.25}
+.af-pulse{fill:none;stroke:var(--yellow);stroke-width:2;stroke-linecap:round;
+  stroke-dasharray:7 93;stroke-dashoffset:100;opacity:.95;
+  filter:drop-shadow(0 0 6px rgba(255,213,19,.8)) drop-shadow(0 0 16px rgba(255,213,19,.35));
+  animation:afrun 5.4s linear infinite}
+@keyframes afrun{0%{stroke-dashoffset:100;opacity:0}6%{opacity:.95}88%{opacity:.95}100%{stroke-dashoffset:0;opacity:0}}
+.af-bus{fill:none;stroke:rgba(255,255,255,.17);stroke-width:2;stroke-linecap:square}
+.af-term{fill:rgba(255,213,19,.38)}
+.af-strike{fill:none;stroke:#FFF8DC;stroke-width:1.15;stroke-linejoin:round;stroke-linecap:round;opacity:0;
+  filter:drop-shadow(0 0 5px rgba(255,213,19,.95)) drop-shadow(0 0 18px rgba(255,213,19,.5))}
+.af-strike.s1{animation:afstrike 6.8s steps(1,end) infinite}
+.af-strike.s2{animation:afstrike 6.8s steps(1,end) infinite;animation-delay:3.4s}
+@keyframes afstrike{0%,85.4%{opacity:0}85.5%{opacity:1}87%{opacity:.15}88%{opacity:1}90%{opacity:.4}91.5%,100%{opacity:0}}
+.af-bloom{fill:url(#afg);opacity:0;animation:afbloom 6.8s ease-out infinite}
+.af-bloom.b2{animation-delay:3.4s}
+@keyframes afbloom{0%,85.4%{opacity:0}86%{opacity:.5}92%{opacity:0}100%{opacity:0}}
+@media (max-width:1040px){.arcfield{display:none}}
+@media (prefers-reduced-motion:reduce){
+  .af-pulse{animation:none;stroke-dasharray:none;stroke-dashoffset:0;opacity:.3;stroke-width:1.5;filter:none}
+  .af-strike{animation:none;opacity:.55}.af-bloom{animation:none;opacity:.3}}
 
 /* sticky audience bar (drives the scrollspy already in app.js) */
 .spy{position:sticky;top:0;z-index:40;background:rgba(20,21,24,.97);backdrop-filter:blur(6px);

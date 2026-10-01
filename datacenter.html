@@ -76,7 +76,36 @@ gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personali
 </aside>
 
 <main id="main">
-<div class="phero grain blueprint"><div class="glow"></div><div class="wrap in">
+<div class="phero grain blueprint"><div class="glow"></div>
+<div class="arcfield" aria-hidden="true">
+<svg viewBox="0 0 560 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialGradient id="afg">
+<stop offset="0%" stop-color="#FFD513" stop-opacity=".6"/>
+<stop offset="50%" stop-color="#FFD513" stop-opacity=".13"/>
+<stop offset="100%" stop-color="#FFD513" stop-opacity="0"/>
+</radialGradient>
+</defs>
+<path class="af-line" d="M560 60 H418 L382 96 V196 H160"/>
+<path class="af-line" d="M560 146 H492 L456 182 V268 H262"/>
+<path class="af-line" d="M560 348 H372 L336 384 V426 H120"/>
+<path class="af-pulse" pathLength="100" style="animation-delay:0s" d="M560 60 H418 L382 96 V196 H160"/>
+<path class="af-pulse" pathLength="100" style="animation-delay:1.9s" d="M560 146 H492 L456 182 V268 H262"/>
+<path class="af-pulse" pathLength="100" style="animation-delay:3.5s" d="M560 348 H372 L336 384 V426 H120"/>
+<circle class="af-node" cx="160" cy="196" r="4"/>
+<circle class="af-node" cx="262" cy="268" r="4"/>
+<circle class="af-node" cx="120" cy="426" r="4"/>
+<circle class="af-bloom" cx="356" cy="300" r="46"/>
+<circle class="af-bloom b2" cx="356" cy="300" r="46"/>
+<path class="af-bus" d="M250 300 H320"/>
+<path class="af-bus" d="M392 300 H560"/>
+<rect class="af-term" x="318" y="294" width="4" height="12" rx="1"/>
+<rect class="af-term" x="390" y="294" width="4" height="12" rx="1"/>
+<path class="af-strike s1" d="M320 300 L325 297 L331 291 L336 301 L344 296 L351 306 L361 298 L370 292 L378 302 L385 299 L392 300 M351 306 L356 314"/>
+<path class="af-strike s2" d="M320 300 L326 304 L330 310 L338 298 L343 305 L353 293 L360 303 L369 309 L377 297 L386 301 L392 300 M338 298 L343 289"/>
+</svg>
+</div>
+<div class="wrap in">
   <div class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; <a href="careers.html">Careers</a> &nbsp;/&nbsp; Data Center Electrical</div>
   <div class="eyebrow reveal">Hyperscale Data Center &amp; Industrial Electrical</div>
   <h1 class="reveal d1">Heavy Electrical.<br>Hyperscale Builds.</h1>
@@ -243,7 +272,7 @@ gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personali
   <h2>Journeyman Electricians,<br>Let&rsquo;s Talk.</h2>
   <div class="rt">
     <a class="btn btn-p" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=KlQG6PZt7kaExywD5iXjkbZhd9dnA6hJkxYTtRK_9zJUMTNINEVUU1VPTTQ1SE1OVElSNkZRTktYNC4u" target="_blank" rel="noopener">Start Your Application <span class="ar">&rarr;</span></a>
-    <a class="btn btn-o" href="tel:2489241919">Call Jake &middot; 248.924.1919</a>
+    <a class="btn btn-o" id="callrec" href="tel:2489241919" aria-label="Call Jake Roux at 248.924.1919" data-recs='[["Jake","248.924.1919","2489241919"],["Brandon","586.850.9801","5868509801"],["Austyn","248.974.7569","2489747569"]]'>Call Jake &middot; 248.924.1919</a>
   </div>
 </div></div>
 
@@ -314,6 +343,18 @@ gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personali
     e.preventDefault(); bar.hidden=false; requestAnimationFrame(function(){bar.classList.add('on');});
   });
 })();
+</script>
+<script>
+/* Rotate the recruiter on the closing CTA so leads spread evenly across Jake, Brandon and Austyn.
+   Round-robin per browser; falls back to random if storage is blocked. */
+(function(){var a=document.getElementById('callrec');if(!a)return;
+var r;try{r=JSON.parse(a.getAttribute('data-recs'));}catch(e){return;}
+if(!r||!r.length)return;var i=0;
+try{var k='sparkRecIdx';i=(parseInt(localStorage.getItem(k),10)+1)||0;i=i%r.length;localStorage.setItem(k,i);}
+catch(e){i=Math.floor(Math.random()*r.length);}
+if(!(i>=0&&i<r.length))i=0;var x=r[i];
+a.href='tel:'+x[2];a.innerHTML='Call '+x[0]+' &middot; '+x[1];
+a.setAttribute('aria-label','Call '+x[0]+' at '+x[1]);})();
 </script>
 </body>
 </html>
