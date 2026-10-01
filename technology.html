@@ -51,10 +51,11 @@
 .capband .lead{font-size:18.5px;line-height:1.62;color:var(--muted);margin:20px 0 0;max-width:38ch}
 .capband .krule{width:72px;height:5px;background:var(--yellow);border-radius:2px;margin:26px 0 0}
 .caplist{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.caplist div{position:relative;display:flex;flex-direction:column;gap:5px;background:#fff;
+.caplist div{position:relative;display:flex;flex-direction:column;gap:5px;background:#fff;padding-left:52px!important;
   border:1px solid var(--line);border-left:4px solid var(--yellow);border-radius:8px;padding:20px 20px 19px;
   box-shadow:0 14px 30px -24px rgba(0,0,0,.5);transition:transform .22s,box-shadow .22s,border-color .22s}
 .caplist div:hover{transform:translateY(-4px);box-shadow:0 26px 48px -26px rgba(0,0,0,.42);border-color:var(--line2);border-left-color:var(--yellow)}
+.caplist div::before{content:'';position:absolute;left:20px;top:22px;width:17px;height:17px;background:var(--yellow);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13.6 1 4 13.2h6.1L9.3 23 20 10.3h-6.6z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13.6 1 4 13.2h6.1L9.3 23 20 10.3h-6.6z'/%3E%3C/svg%3E") center/contain no-repeat}
 .caplist .ct{font-family:var(--label);font-weight:800;font-size:15px;letter-spacing:.4px;color:var(--ink)}
 .caplist .cs{font-size:13.5px;line-height:1.5;color:var(--muted2)}
 
