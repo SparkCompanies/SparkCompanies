@@ -320,5 +320,62 @@
 </footer>
 <button id="totop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&uarr;</button>
 <script src="app.js"></script>
+
+<!-- video greeting: opens once per session, dismissable -->
+<div class="vmodal" id="vmodal" role="dialog" aria-modal="true" aria-label="Spark Companies video" hidden>
+  <div class="vm-scrim" id="vmscrim"></div>
+  <div class="vm-box">
+    <button class="vm-close" id="vmclose" aria-label="Close video">&times;</button>
+    <video id="vmvid" controls playsinline muted preload="none" poster="video-poster.jpg">
+      <source src="spark-platforms.mp4" type="video/mp4">
+      <p style="color:#fff;padding:22px">Your browser can&rsquo;t play this video.
+        <a href="spark-platforms.mp4" style="color:#FFD513">Download it instead</a>.</p>
+    </video>
+    <div class="vm-foot">
+      <span>One partner. The whole workforce.</span>
+      <a class="btn btn-y btn-sm" href="technology.html">See The Platforms <span class="ar">&rarr;</span></a>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var m=document.getElementById('vmodal'); if(!m) return;
+  var vid=document.getElementById('vmvid'), closeBtn=document.getElementById('vmclose'),
+      scrim=document.getElementById('vmscrim'), lastFocus=null, shown=false;
+  function seen(){ try{ return sessionStorage.getItem('sparkVideoSeen')==='1'; }catch(e){ return false; } }
+  function mark(){ try{ sessionStorage.setItem('sparkVideoSeen','1'); }catch(e){} }
+  function open(){
+    if(shown) return; shown=true; lastFocus=document.activeElement;
+    m.hidden=false; document.body.style.overflow='hidden';
+    requestAnimationFrame(function(){ m.classList.add('on'); });
+    var p=vid.play(); if(p&&p.catch) p.catch(function(){});
+    closeBtn.focus(); mark();
+  }
+  function close(){
+    m.classList.remove('on'); document.body.style.overflow='';
+    try{ vid.pause(); }catch(e){}
+    setTimeout(function(){ m.hidden=true; },260);
+    if(lastFocus&&lastFocus.focus) lastFocus.focus();
+  }
+  closeBtn.addEventListener('click',close);
+  scrim.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){
+    if(m.hidden) return;
+    if(e.key==='Escape'){ close(); return; }
+    if(e.key==='Tab'){ /* keep focus inside while open */
+      var f=m.querySelectorAll('button,video,a[href]');
+      if(!f.length) return;
+      var first=f[0], last=f[f.length-1];
+      if(e.shiftKey&&document.activeElement===first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey&&document.activeElement===last){ e.preventDefault(); first.focus(); }
+    }
+  });
+  if(!seen()) setTimeout(open,900);
+  /* the homepage teaser thumbnail replays it on demand */
+  var t=document.querySelector('.tplay');
+  if(t) t.addEventListener('click',function(e){ e.preventDefault(); shown=false; open(); });
+})();
+</script>
+
 </body>
 </html>
