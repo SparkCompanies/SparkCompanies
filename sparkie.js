@@ -165,9 +165,14 @@
 
   var BOLT = '<svg class="sk-bolt" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.6 1 4 13.2h6.1L9.3 23 20 10.3h-6.6z"/></svg>';
 
-  var root, panel, bodyEl, backBtn, tabBtn, stack = [], open = false, lastFocus = null;
+  var root, panel, bodyEl, backBtn, tabBtn, stack = [], open = false, lastFocus = null, guard = 0;
 
-  function esc(s) { return String(s); }
+  /* A card we can always fall back to, so the panel is never blank. */
+  var SAFE = {
+    k: 'Let’s Get You To The Right Person',
+    p: 'Tell us what you need and the right person on our team will reach out.',
+    b: [{ t: 'Contact Spark', h: 'contact.html', p: 1 }, { t: 'Call 586.930.5000', h: 'tel:5869305000' }]
+  };
 
   function build() {
     root = document.createElement('div');
@@ -176,65 +181,62 @@
       '<button class="sk-tab" type="button" aria-expanded="false" aria-controls="sk-panel">' +
         BOLT + '<span>Need A Hand?</span>' +
       '</button>' +
-      '<div class="sk-panel" id="sk-panel" role="dialog" aria-modal="false" aria-label="Sparkie, the Spark site guide" hidden>' +
+      '<div class="sk-panel" id="sk-panel" role="dialog" aria-label="Sparkie, the Spark site guide" hidden>' +
         '<div class="sk-head">' +
           '<div class="sk-id">' + BOLT + '<div><b>Sparkie</b><span>Your Spark guide</span></div></div>' +
           '<button class="sk-x" type="button" aria-label="Close the guide">&times;</button>' +
         '</div>' +
-        '<div class="sk-body" tabindex="-1"></div>' +
+        '<div class="sk-body" tabindex="-1" aria-live="polite"></div>' +
         '<div class="sk-foot">' +
           '<button class="sk-back" type="button" hidden>&larr; Back</button>' +
-          '<a class="sk-skip" href="contact.html">Rather just talk to a person?</a>' +
+          '<a class="sk-skip" href="contact.html">Talk to a person</a>' +
         '</div>' +
       '</div>';
     document.body.appendChild(root);
-    panel = root.querySelector('.sk-panel');
+    panel  = root.querySelector('.sk-panel');
     bodyEl = root.querySelector('.sk-body');
-    backBtn = root.querySelector('.sk-back');
+    backBtn= root.querySelector('.sk-back');
     tabBtn = root.querySelector('.sk-tab');
 
     tabBtn.addEventListener('click', function () { open ? close() : show(); });
     root.querySelector('.sk-x').addEventListener('click', close);
     backBtn.addEventListener('click', function () {
       stack.pop();
-      render(stack.length ? stack[stack.length - 1] : 'start', true);
+      draw(stack.length ? stack[stack.length - 1] : 'start', true);
     });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && open) { close(); tabBtn.focus(); }
     });
   }
 
-  function node(id) { return T[id]; }
+  /* One entry point. Decides question vs card, can never recurse. */
+  function draw(id, popped) {
+    if (++guard > 40) { card(SAFE); return; }
+    if (!popped && stack[stack.length - 1] !== id) stack.push(id);
+    var n = T[id];
+    if (n && n.skipTo) { id = n.skipTo; n = null;
+      if (stack[stack.length - 1] !== id) stack.push(id); }
+    if (n && n.a && n.a.length) return question(n);
+    var e = E[id];
+    return card(e || SAFE);
+  }
 
-  function render(id, popped) {
-    if (!popped) {
-      if (stack[stack.length - 1] !== id) stack.push(id);
-    }
-    var n = node(id);
-    if (n && n.skipTo) return renderEnd(n.skipTo);
-    if (!n) return renderEnd(id);
-
-    var h = '<p class="sk-q">' + esc(n.q) + '</p><div class="sk-opts">';
+  function question(n) {
+    var h = '<p class="sk-q">' + n.q + '</p><div class="sk-opts">';
     for (var i = 0; i < n.a.length; i++) {
-      var a = n.a[i];
-      h += '<button class="sk-o' + (a.hot ? ' hot' : '') + '" type="button" data-i="' + i + '">' +
-           '<span>' + a.t + '</span><i aria-hidden="true">&rarr;</i></button>';
+      h += '<button class="sk-o' + (n.a[i].hot ? ' hot' : '') + '" type="button" data-i="' + i + '">' +
+           '<span>' + n.a[i].t + '</span><i aria-hidden="true">&rarr;</i></button>';
     }
-    h += '</div>';
-    paint(h);
-    var btns = bodyEl.querySelectorAll('.sk-o');
-    for (var j = 0; j < btns.length; j++) {
-      btns[j].addEventListener('click', function () {
-        var a = n.a[+this.getAttribute('data-i')];
-        a.go ? render(a.go) : renderEnd(a.end);
-      });
+    paint(h + '</div>');
+    var b = bodyEl.querySelectorAll('.sk-o');
+    for (var j = 0; j < b.length; j++) {
+      (function (a) {
+        b[j].addEventListener('click', function () { guard = 0; draw(a.go || a.end); });
+      })(n.a[j]);
     }
   }
 
-  function renderEnd(id) {
-    if (stack[stack.length - 1] !== id) stack.push(id);
-    var e = E[id];
-    if (!e) return render('start');
+  function card(e) {
     var h = '<div class="sk-end"><div class="sk-k">' + e.k + '</div><p>' + e.p + '</p>';
     if (e.recs) {
       h += '<div class="sk-recs"><div class="sk-rl">Or call one of them directly</div>';
@@ -246,18 +248,16 @@
     h += '<div class="sk-acts">';
     for (var i = 0; i < e.b.length; i++) {
       var b = e.b[i], cls = 'sk-b' + (b.p ? ' pri' : '');
-      if (b.go) {
-        h += '<button class="' + cls + '" type="button" data-go="' + b.go + '">' + b.t + '</button>';
-      } else {
-        h += '<a class="' + cls + '" href="' + b.h + '"' + (b.x ? ' target="_blank" rel="noopener"' : '') + '>' + b.t + '</a>';
-      }
+      h += b.go
+        ? '<button class="' + cls + '" type="button" data-go="' + b.go + '">' + b.t + '</button>'
+        : '<a class="' + cls + '" href="' + b.h + '"' + (b.x ? ' target="_blank" rel="noopener"' : '') + '>' + b.t + '</a>';
     }
     h += '</div><button class="sk-restart" type="button">Start over</button></div>';
     paint(h);
     var g = bodyEl.querySelector('[data-go]');
-    if (g) g.addEventListener('click', function () { render(this.getAttribute('data-go')); });
+    if (g) g.addEventListener('click', function () { guard = 0; draw(this.getAttribute('data-go')); });
     bodyEl.querySelector('.sk-restart').addEventListener('click', function () {
-      stack = []; render('start');
+      guard = 0; stack = []; draw('start');
     });
   }
 
@@ -265,8 +265,7 @@
     bodyEl.innerHTML = h;
     bodyEl.scrollTop = 0;
     backBtn.hidden = stack.length < 2;
-    var f = bodyEl.querySelector('button,a');
-    if (open && f) f.focus();
+    if (open) { var f = bodyEl.querySelector('button,a'); if (f) f.focus(); }
   }
 
   function show() {
@@ -275,9 +274,10 @@
     open = true;
     tabBtn.setAttribute('aria-expanded', 'true');
     root.classList.add('on');
-    if (!stack.length) render('start'); else paint(bodyEl.innerHTML);
+    root.classList.remove('nudge');
+    if (!bodyEl.innerHTML || !stack.length) { guard = 0; stack = []; draw('start'); }
     var f = bodyEl.querySelector('button,a');
-    if (f) f.focus(); else bodyEl.focus();
+    (f || bodyEl).focus();
     try { sessionStorage.setItem('sparkieSeen', '1'); } catch (err) {}
   }
 
@@ -290,11 +290,15 @@
   }
 
   function init() {
-    if (document.querySelector('.sk')) return;
-    build();
+    if (document.querySelector('div.sk')) return;
     try {
-      if (!sessionStorage.getItem('sparkieSeen')) root.classList.add('nudge');
-    } catch (err) { root.classList.add('nudge'); }
+      build();
+      guard = 0; stack = []; draw('start');      // content exists before it is ever opened
+      try { if (!sessionStorage.getItem('sparkieSeen')) root.classList.add('nudge'); }
+      catch (err) { root.classList.add('nudge'); }
+    } catch (err) {
+      if (root && bodyEl) { try { card(SAFE); } catch (e2) {} }
+    }
   }
 
   if (document.readyState === 'loading') {
